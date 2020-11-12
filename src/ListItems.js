@@ -6,10 +6,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 function ListItems(props){
     const items=props.items;
     const listItems=items.map(item => {
-        return <div className="list" key="item.key">
-            <p>{item.text}
+        return <div className="list" key={item.key}>
+            <p>
+                <input type="text" value={item.text} id={item.key} />
             <span>
-                <FontAwesomeIcon className="faicons" icon='trash' />
+                <FontAwesomeIcon className="faicons" icon='trash' 
+                onClick={()=>props.deleteItem(item.key)}
+                />
 
             </span>
             </p>
