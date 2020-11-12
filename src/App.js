@@ -1,16 +1,61 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ListItems from './ListItems.js'
 
 
 class App extends React.Component{
+  constructor(props){
+    super(props); 
+    this.state={
+      items: [], 
+      currentItem:{
+        text:'', 
+        key:''
+      }
+     
+    }
+    this.handleInput=this.handleInput.bind(this);
+    this.addItem=this.addItem.bind(this);
+  }
+
+  handleInput(event){
+    this.setState({
+      currentItem:{
+        text:event.target.value,
+        key:Date.now()
+      }
+    })
+  }
+
+  addItem(event){
+    event.preventDefault(); 
+    const newItem=this.state.currentItem; 
+    //console.log(newItem);
+    if(newItem.text!=""){
+      const newItems=[newItem,...this.state.items]; 
+      this.setState({
+        items: newItems, 
+        currentItem:{
+          text: '', 
+          key: ''
+        }
+      })
+    }
+  }
+
   render(){
     return (
       <div className="App"> 
-        <form id="to-do-form">
-          <input type="text" placeholder="Enter Your Task Here.." />
+      <header>
+        <form id="to-do-form" onSubmit={this.addItem}>
+          <input type="text" placeholder="Enter Your Task Here.." 
+          value={this.state.currentItem.text} 
+          onChange={this.handleInput}/>
           <button type="submit">Add</button>
         </form>
+      </header>
+      <ListItems items={this.state.items}></ListItems>
       </div>
     );
 
