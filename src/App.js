@@ -6,10 +6,12 @@ import './App.css';
 class App extends React.Component{
   render(){
     return (
-      <form id="to-do-form">
-        <input type="text" placeholder="Enter your task here.." />
-        <button type="submit">Add</button>
-      </form>
+      <div className="App"> 
+        <form id="to-do-form">
+          <input type="text" placeholder="Enter Your Task Here.." />
+          <button type="submit">Add</button>
+        </form>
+      </div>
     );
 
   }
